@@ -5,6 +5,7 @@ import {
   Outlet,
   RouterProvider,
 } from "react-router";
+import loadingIcon from "../assets/loading.svg";
 // import Friend from "../pages/Friend";
 // import Profile from "../pages/Profile";
 // import Login from "../pages/Login";
@@ -47,7 +48,7 @@ function AppRouter() {
 
   return (
     // <Suspense fallback={<p className="text-4xl">〘 LOADING... 〙</p>}>
-    <Suspense fallback={<img className="animate-spin" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgb4Nz2RvY2RVfU_qpqL8fqQGGgKC3wNwDCADd0qTfhE-24UGyfdaIia-XsArjnr8HlvIL1fzVDwxYI7l26IluluPOC6IJ67kZ5PJmh77n1PjQsz2CLPj4zv0ZSLpuw01mJZSQ1Lmm4Zile/s800/computer_bar5_load.png" />}>
+    <Suspense fallback={<img className="animate-spin w-1/5 h-1/5 m-auto mt-70" src={loadingIcon} />}>
       {/* <button onClick={() => setUser(!user)} className="btn btn-primary">
         《 LOGIN ≒ LOGOUT 》
       </button> */}
