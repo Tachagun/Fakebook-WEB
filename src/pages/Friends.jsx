@@ -1,11 +1,11 @@
 import React from 'react';
 
-function Friend() {
+function Friends() {
   return (
     <div>
-      Friend Page
+      Friends Page
     </div>
   );
 }
 
-export default Friend;
+export default Friends;

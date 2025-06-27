@@ -15,8 +15,6 @@ export const loginSchema = object({
   password: string().min(4).required(),
   email: string().email(),
 	mobile: string().matches(mobileRegex)
- }).transform( value => {
-  return ({...value, [emailRegex.test(value.identity) ? 'email' : 'mobile'] : value.identity})
  }).noUnknown()
 
 export const registerSchema = object({

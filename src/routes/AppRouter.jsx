@@ -6,7 +6,9 @@ import {
   RouterProvider,
 } from "react-router";
 import loadingIcon from "../assets/loading.svg";
-// import Friend from "../pages/Friend";
+import { useUserStore } from "../stores/userStore";
+import UserLayout from "../layouts/UserLayout";
+// import Friends from "../pages/Friend";
 // import Profile from "../pages/Profile";
 // import Login from "../pages/Login";
 // import Home from "../pages/Home";
@@ -14,7 +16,7 @@ import loadingIcon from "../assets/loading.svg";
 const Login = lazy(() => import("../pages/Login"));
 const Profile = lazy(() => import("../pages/Profile"));
 const Home = lazy(() => import("../pages/Home"));
-const Friend = lazy(() => import("../pages/Friend"));
+const Friends = lazy(() => import("../pages/Friends"));
 
 const guestRouter = createBrowserRouter([
   { path: "/", element: <Login /> },
@@ -25,15 +27,10 @@ const guestRouter = createBrowserRouter([
 const userRouter = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <>
-        <div className="text-4xl py-4 border">Header</div>
-        <Outlet />
-      </>
-    ),
+    element: <UserLayout />,   
     children: [
       { index: true, element: <Home /> },
-      { path: "friends", element: <Friend /> },
+      { path: "friends", element: <Friends /> },
       { path: "profile", element: <Profile /> },
       { path: "*", element: <Navigate to="/" replace /> },
     ],
@@ -41,18 +38,12 @@ const userRouter = createBrowserRouter([
 ]);
 
 function AppRouter() {
-  let user = null;
-  // let user = "andy";
-  // const [user, setUser] = useState(false);
+  const user = useUserStore(state=>state.user)
   const finalRouter = user ? userRouter : guestRouter;
 
   return (
-    // <Suspense fallback={<p className="text-4xl">〘 LOADING... 〙</p>}>
     <Suspense fallback={<img className="animate-spin w-1/5 h-1/5 m-auto mt-70" src={loadingIcon} />}>
-      {/* <button onClick={() => setUser(!user)} className="btn btn-primary">
-        《 LOGIN ≒ LOGOUT 》
-      </button> */}
-      <RouterProvider router={finalRouter} />
+      <RouterProvider key={user?.id} router={finalRouter} />
     </Suspense>
   );
 }
