@@ -42,7 +42,8 @@ function AppRouter() {
   const finalRouter = user ? userRouter : guestRouter;
 
   return (
-    <Suspense fallback={<img className="animate-spin w-1/5 h-1/5 m-auto mt-70" src={loadingIcon} />}>
+    // <Suspense fallback={<img className="animate-spin w-1/5 h-1/5 m-auto mt-70" src={loadingIcon} />}>
+    <Suspense>
       <RouterProvider key={user?.id} router={finalRouter} />
     </Suspense>
   );
